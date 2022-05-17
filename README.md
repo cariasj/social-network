@@ -31,10 +31,11 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 
 
 # Installation
-npm init
-mongoDB and express 
-npm start
-test with insomnia or postman
+
+- npm init
+- mongoDB and express 
+- npm start
+- test with insomnia or postman
 
 # Walkthrough Video (download if poor quality)
 https://drive.google.com/file/d/1Zus0cNbZ5TiHRh0f__oI5tcEo95iBGdg/view
