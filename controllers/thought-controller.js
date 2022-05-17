@@ -4,7 +4,7 @@ const thoughtController = {
 
   // all thoughts
   getAllThoughts(req,res) {
-    Thoughts.find({})
+    Thought.find({})
     .populate({path: 'reactions', select: '-__v'})
     .select('-__v')
     .then(dbThoughtsData => res.json(dbThoughtsData))
@@ -47,7 +47,7 @@ const thoughtController = {
         })
         .then(thoughts => {
             if (!thoughts) {
-                res.status(404).json({ message: 'Invalid' });
+                res.status(404).json({ message: 'Invalid (create thought)' });
                 return;
             }
             res.json(thoughts);
@@ -63,7 +63,7 @@ const thoughtController = {
     })
       .then((dbThoughtData) => {
         if (!dbThoughtData) {
-          res.status(404).json({ message: "Invalid" });
+          res.status(404).json({ message: "Invalid (update thought)" });
           return;
         }
         res.json(dbThoughtData);
@@ -76,7 +76,7 @@ const thoughtController = {
     Thought.findOneAndDelete({ _id: params.id })
       .then(thoughts => {
         if (!thoughts) {
-          res.status(404).json({ message: 'Invalid ID' });
+          res.status(404).json({ message: 'Invalid ID (del thought)' });
           return;
         }
         return User.findOneAndUpdate(
@@ -99,7 +99,7 @@ const thoughtController = {
     Thought.findOneAndUpdate(
       {_id: params.thoughtId}, 
       {$push: {reactions: body}}, 
-      {new: true, runValidators: true})
+      {new: true, runValidators: false})
       .then(updatedThought => {
         if (!updatedThought) {
             res.status(404).json({

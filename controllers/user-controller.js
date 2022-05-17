@@ -17,7 +17,7 @@ const userController = {
       },
 
   getUserById({ params }, res) {
-    Users.findOne({_id: params.id })
+    User.findOne({_id: params.id })
     .populate({path: 'thoughts', select: '-__v'})
     .populate({path: 'friends', select: '-__v'})
     .select('-__v')
@@ -75,7 +75,7 @@ const userController = {
     )
       .then((dbUserData) => {
         if (!dbUserData) {
-          res.status(404).json({ message: 'No results' });
+          res.status(404).json({ message: 'No results (add friend)' });
           return;
         }
         res.json(dbUserData);
